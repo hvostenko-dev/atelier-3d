@@ -1,7 +1,8 @@
 {
-  "name": "client",
+  "name": "atelier-3d-studio",
   "private": true,
-  "version": "0.0.0",
+  "version": "2.0.0",
+  "description": "ATELIER 3D — Interactive WebGL Apparel Configurator, Procedural Pattern Engine & Tech-Pack Studio built with React 19, Three.js, React Three Fiber & Valtio",
   "type": "module",
   "scripts": {
     "dev": "vite",

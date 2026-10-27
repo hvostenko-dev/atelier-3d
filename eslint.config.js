@@ -17,5 +17,9 @@ export default defineConfig([
       globals: globals.browser,
       parserOptions: { ecmaFeatures: { jsx: true } },
     },
+    rules: {
+      'react-hooks/immutability': 'off',
+      'no-unused-vars': ['error', { varsIgnorePattern: '^(React|motion|AnimatePresence)$' }],
+    },
   },
 ])

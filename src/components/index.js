@@ -1,8 +1,21 @@
 import CustomButton from './CustomButton';
-import AIPicker from './AIPicker.jsx';
-import ColorPicker from './ColorPicker.jsx';
-import FilePicker from './FilePicker.jsx';
-import Tab from './Tab.jsx';
+import AIPicker from './AIPicker';
+import ColorPicker from './ColorPicker';
+import FilePicker from './FilePicker';
+import Tab from './Tab';
+import TextStudio from './TextStudio';
+import DecalTransform from './DecalTransform';
+import LookbookDrawer from './LookbookDrawer';
+import TechPackModal from './TechPackModal';
 
-
-export { CustomButton,AIPicker,ColorPicker,FilePicker,Tab };
+export {
+  CustomButton,
+  AIPicker,
+  ColorPicker,
+  FilePicker,
+  Tab,
+  TextStudio,
+  DecalTransform,
+  LookbookDrawer,
+  TechPackModal,
+};

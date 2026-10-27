@@ -1,36 +1,41 @@
-import React from 'react'
+import React from 'react';
 import { useSnapshot } from 'valtio';
 
 import state from '../store';
 import { getContrastingColor } from '../config/helpers';
 
-const CustomButton = ({ type, title, customStyles, handleClick }) => {
-    const snap = useSnapshot(state);
+const CustomButton = ({ type, title, customStyles = '', handleClick, disabled = false, icon = null }) => {
+  const snap = useSnapshot(state);
 
-    const generateStyle = (type) => {
-        if(type === 'filled') {
-            return {
-                backgroundColor: snap.color,
-                color: getContrastingColor(snap.color)
-            }
-        } else if(type === "outline") {
-            return {
-                borderWidth: '1px',
-                borderColor: snap.color,
-                color: snap.color
-            }
-        }
+  const generateStyle = (btnType) => {
+    if (btnType === 'filled') {
+      const bg = snap.color === '#0F172A' || snap.color === '#18181B' ? '#F59E0B' : snap.color;
+      return {
+        backgroundColor: bg,
+        color: getContrastingColor(bg),
+      };
+    } else if (btnType === 'outline') {
+      return {
+        borderWidth: '1px',
+        borderColor: 'rgba(255,255,255,0.22)',
+        color: '#F8FAFC',
+      };
     }
+    return {};
+  };
 
-    return (
-        <button
-            className={`px-2 py-1.5 flex-1 rounded-md ${customStyles}`}
-            style={generateStyle(type)}
-            onClick={handleClick}
-        >
-            {title}
-        </button>
-    )
-}
+  return (
+    <button
+      type="button"
+      disabled={disabled}
+      className={`px-3 py-2 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed ${customStyles}`}
+      style={generateStyle(type)}
+      onClick={handleClick}
+    >
+      {icon}
+      <span>{title}</span>
+    </button>
+  );
+};
 
-export default CustomButton
+export default CustomButton;
