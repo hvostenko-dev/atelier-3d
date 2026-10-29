@@ -7,6 +7,7 @@
 
 html {
   font-family: "Inter", sans-serif;
+  -webkit-text-size-adjust: 100%;
 }
 
 @supports (font-variation-settings: normal) {
@@ -15,56 +16,92 @@ html {
   }
 }
 
-.app {
-  @apply relative w-full h-screen overflow-hidden;
-  background:
-    radial-gradient(circle at 68% 42%, rgba(245, 158, 11, 0.12), transparent 52%),
-    radial-gradient(circle at 22% 80%, rgba(56, 189, 248, 0.09), transparent 48%),
-    linear-gradient(135deg, #070b14 0%, #0f172a 55%, #090d16 100%);
+@layer components {
+  .app {
+    @apply relative w-full overflow-hidden select-none;
+    height: 100vh;
+    height: 100dvh;
+    min-height: -webkit-fill-available;
+    background:
+      radial-gradient(circle at 68% 42%, rgba(245, 158, 11, 0.12), transparent 52%),
+      radial-gradient(circle at 22% 80%, rgba(56, 189, 248, 0.09), transparent 48%),
+      linear-gradient(135deg, #070b14 0%, #0f172a 55%, #090d16 100%);
+  }
+
+  .home {
+    @apply w-full lg:w-fit h-full max-h-[100dvh] overflow-y-auto overflow-x-hidden flex flex-col justify-between items-start py-4 px-4 sm:py-6 sm:px-8 lg:py-7 lg:px-14 xl:py-9 xl:px-24 gap-4 absolute inset-0 z-10 pointer-events-none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .home * {
+    pointer-events: auto;
+  }
+
+  .home-content {
+    @apply flex-1 flex flex-col justify-center gap-3 sm:gap-4 lg:gap-5 max-w-full my-auto;
+  }
+
+  .head-text {
+    @apply font-black text-white tracking-tighter;
+    font-size: clamp(2.15rem, min(6vw, 8.2vh), 5.8rem);
+    line-height: 1.02;
+  }
+
+  .editortabs-container {
+    @apply bg-slate-900/90 border border-white/15 backdrop-blur-xl w-12 lg:w-14 rounded-2xl flex flex-col justify-center items-center py-2 gap-1.5 shadow-2xl;
+  }
+
+  .studio-panel {
+    background: rgba(15, 23, 42, 0.94);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .filtertabs-container {
+    @apply w-full flex justify-center items-center gap-1.5 lg:gap-2.5 px-2 pointer-events-none;
+  }
+
+  .filtertabs-container > * {
+    pointer-events: auto;
+  }
+
+  .glassmorphism {
+    background: rgba(15, 23, 42, 0.78);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+  }
 }
 
-.home {
-  @apply w-fit xl:h-full flex xl:justify-between justify-start items-start flex-col xl:py-10 xl:px-28 sm:p-8 p-6 max-xl:gap-7 absolute z-10 pointer-events-none;
+canvas {
+  touch-action: none;
 }
 
-.home * {
-  pointer-events: auto;
+/* Custom sleek scrollbar for studio panels */
+.studio-scroll::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+.studio-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.studio-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 9999px;
+}
+.studio-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(251, 191, 36, 0.5);
 }
 
-.home-content {
-  @apply flex-1 xl:justify-center justify-start flex flex-col gap-8;
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
-
-.head-text {
-  @apply xl:text-[7.5rem] sm:text-[5.2rem] text-[3.6rem] xl:leading-[7.8rem] sm:leading-[5.6rem] leading-[4rem] font-black text-white tracking-tighter;
-}
-
-.editortabs-container {
-  @apply bg-slate-900/85 border border-white/15 backdrop-blur-xl w-16 rounded-2xl flex flex-col justify-center items-center py-3 gap-2 shadow-2xl;
-}
-
-.studio-panel {
-  background: rgba(15, 23, 42, 0.9);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-}
-
-.filtertabs-container {
-  @apply fixed z-20 bottom-5 right-0 left-0 w-full flex justify-center items-center flex-wrap gap-2.5 px-4 pointer-events-none;
-}
-
-.filtertabs-container > * {
-  pointer-events: auto;
-}
-
-.glassmorphism {
-  background: rgba(15, 23, 42, 0.78);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 input[type="file"] {
@@ -76,11 +113,13 @@ input[type="file"] {
 }
 
 .sketch-picker {
-  width: 260px !important;
+  width: 250px !important;
+  max-width: 100% !important;
   background: rgba(15, 23, 42, 0.95) !important;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
   border: 1px solid rgba(255, 255, 255, 0.15) !important;
   border-radius: 12px !important;
+  box-sizing: border-box !important;
 }
 
 .sketch-picker label {

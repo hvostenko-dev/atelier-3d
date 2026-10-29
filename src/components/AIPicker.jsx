@@ -33,13 +33,13 @@ const AIPicker = ({ prompt, setPrompt, generatingImg, handleSubmit, onApplyProce
   };
 
   return (
-    <div className="studio-panel w-[335px] max-h-[82vh] overflow-y-auto p-4 rounded-2xl flex flex-col gap-3.5 text-slate-100">
-      <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
+    <div className="studio-panel studio-scroll w-full md:w-[310px] lg:w-[330px] max-h-[72dvh] md:max-h-full overflow-y-auto p-3.5 rounded-2xl flex flex-col gap-3 text-slate-100">
+      <div className="flex items-center justify-between border-b border-white/10 pb-2 shrink-0">
         <div>
-          <h3 className="text-sm font-bold tracking-wide uppercase text-white">
+          <h3 className="text-xs sm:text-sm font-bold tracking-wide uppercase text-white">
             AI & Procedural Pattern Studio
           </h3>
-          <p className="text-[11px] text-slate-400">
+          <p className="text-[10px] sm:text-[11px] text-slate-400">
             Instant client-side generative art & seamless print engine
           </p>
         </div>
@@ -47,7 +47,7 @@ const AIPicker = ({ prompt, setPrompt, generatingImg, handleSubmit, onApplyProce
           <button
             type="button"
             onClick={onClose}
-            className="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-white/10"
+            className="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-white/10 transition cursor-pointer shrink-0"
           >
             ✕
           </button>
@@ -55,11 +55,11 @@ const AIPicker = ({ prompt, setPrompt, generatingImg, handleSubmit, onApplyProce
       </div>
 
       {/* Engine Mode Switcher */}
-      <div className="grid grid-cols-2 gap-1 bg-slate-900/90 p-1 rounded-xl border border-white/10">
+      <div className="grid grid-cols-2 gap-1 bg-slate-900/90 p-1 rounded-xl border border-white/10 shrink-0">
         <button
           type="button"
           onClick={() => setEngineMode('procedural')}
-          className={`py-1.5 rounded-lg text-[11px] font-bold transition cursor-pointer ${
+          className={`py-1.5 rounded-lg text-[10px] sm:text-[11px] font-bold transition cursor-pointer ${
             engineMode === 'procedural'
               ? 'bg-amber-400 text-slate-950'
               : 'text-slate-400 hover:text-white'
@@ -70,7 +70,7 @@ const AIPicker = ({ prompt, setPrompt, generatingImg, handleSubmit, onApplyProce
         <button
           type="button"
           onClick={() => setEngineMode('api')}
-          className={`py-1.5 rounded-lg text-[11px] font-bold transition cursor-pointer ${
+          className={`py-1.5 rounded-lg text-[10px] sm:text-[11px] font-bold transition cursor-pointer ${
             engineMode === 'api'
               ? 'bg-sky-400 text-slate-950'
               : 'text-slate-400 hover:text-white'
@@ -81,16 +81,16 @@ const AIPicker = ({ prompt, setPrompt, generatingImg, handleSubmit, onApplyProce
       </div>
 
       {/* Prompt Input */}
-      <div>
+      <div className="shrink-0">
         <label className="text-[11px] text-slate-400 block mb-1">
           Creative Prompt / Style Seed
         </label>
         <textarea
-          placeholder="Describe style, e.g. 'Cyberpunk Neon Sun', 'Bauhaus Geometric', 'Topographic Contour'..."
-          rows={3}
+          placeholder="Describe style, e.g. 'Cyberpunk Neon Sun', 'Bauhaus Geometric'..."
+          rows={2}
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
-          className="w-full rounded-xl bg-slate-900/90 border border-white/15 p-2.5 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-amber-400 resize-none"
+          className="w-full rounded-xl bg-slate-900/90 border border-white/15 p-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-amber-400 resize-none"
         />
 
         {/* Quick Prompt Chips */}
@@ -110,36 +110,36 @@ const AIPicker = ({ prompt, setPrompt, generatingImg, handleSubmit, onApplyProce
 
       {/* Action Buttons */}
       {engineMode === 'procedural' ? (
-        <div className="grid grid-cols-3 gap-1.5">
+        <div className="grid grid-cols-3 gap-1.5 shrink-0">
           <button
             type="button"
             onClick={() => handleInstantSynthesize('logo')}
-            className="py-2 px-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-[11px] transition cursor-pointer"
+            className="py-2 px-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-[10px] sm:text-[11px] transition cursor-pointer text-center whitespace-nowrap"
           >
             Front Crest
           </button>
           <button
             type="button"
             onClick={() => handleInstantSynthesize('back')}
-            className="py-2 px-2 rounded-xl bg-sky-400 hover:bg-sky-300 text-slate-950 font-bold text-[11px] transition cursor-pointer"
+            className="py-2 px-1.5 rounded-xl bg-sky-400 hover:bg-sky-300 text-slate-950 font-bold text-[10px] sm:text-[11px] transition cursor-pointer text-center whitespace-nowrap"
           >
             Back Graphic
           </button>
           <button
             type="button"
             onClick={() => handleInstantSynthesize('full')}
-            className="py-2 px-2 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-bold text-[11px] transition cursor-pointer"
+            className="py-2 px-1.5 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-bold text-[10px] sm:text-[11px] transition cursor-pointer text-center whitespace-nowrap"
           >
             Full Pattern
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-2 gap-2 shrink-0">
           <button
             type="button"
             disabled={generatingImg}
             onClick={() => handleSubmit('logo')}
-            className="py-2 px-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs transition cursor-pointer disabled:opacity-50"
+            className="py-2 px-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs transition cursor-pointer disabled:opacity-50 whitespace-nowrap"
           >
             {generatingImg ? 'Requesting...' : 'API Logo'}
           </button>
@@ -147,19 +147,19 @@ const AIPicker = ({ prompt, setPrompt, generatingImg, handleSubmit, onApplyProce
             type="button"
             disabled={generatingImg}
             onClick={() => handleSubmit('full')}
-            className="py-2 px-3 rounded-xl bg-sky-400 hover:bg-sky-300 text-slate-950 font-bold text-xs transition cursor-pointer disabled:opacity-50"
+            className="py-2 px-3 rounded-xl bg-sky-400 hover:bg-sky-300 text-slate-950 font-bold text-xs transition cursor-pointer disabled:opacity-50 whitespace-nowrap"
           >
-            {generatingImg ? 'Requesting...' : 'API Full Pattern'}
+            {generatingImg ? 'Requesting...' : 'API Full'}
           </button>
         </div>
       )}
 
       {/* Curated Preset Library */}
-      <div className="border-t border-white/10 pt-3">
-        <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-300 block mb-2">
-          1-Click Studio Badges & All-Over Prints
+      <div className="border-t border-white/10 pt-2.5 shrink-0">
+        <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-300 block mb-1.5">
+          1-Click Badges & All-Over Prints
         </span>
-        <div className="grid grid-cols-3 gap-1.5">
+        <div className="grid grid-cols-2 xs:grid-cols-3 gap-1.5">
           {CURATED_GRAPHICS.map((item) => (
             <button
               key={item.id}
@@ -169,14 +169,14 @@ const AIPicker = ({ prompt, setPrompt, generatingImg, handleSubmit, onApplyProce
             >
               <div className="flex items-center justify-between">
                 <span
-                  className="w-3 h-3 rounded-full"
+                  className="w-2.5 h-2.5 rounded-full shrink-0"
                   style={{ backgroundColor: item.previewColor }}
                 />
-                <span className="text-[9px] uppercase font-mono px-1 rounded bg-white/10 text-slate-300">
+                <span className="text-[9px] uppercase font-mono px-1 rounded bg-white/10 text-slate-300 truncate">
                   {item.category}
                 </span>
               </div>
-              <span className="text-[11px] font-semibold text-slate-100 leading-tight truncate">
+              <span className="text-[10px] sm:text-[11px] font-semibold text-slate-100 leading-tight truncate">
                 {item.name}
               </span>
             </button>

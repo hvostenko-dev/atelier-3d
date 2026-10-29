@@ -14,7 +14,7 @@ const FONT_OPTIONS = [
 const BG_STYLES = [
   { id: 'box', label: 'Street Box' },
   { id: 'jersey', label: 'Jersey #99' },
-  { id: 'arched', label: 'Collegiate Arc' },
+  { id: 'arched', label: 'Collegiate' },
   { id: 'badge', label: 'Hex Crest' },
   { id: 'circle', label: 'Seal Stamp' },
   { id: 'none', label: 'Clean Type' },
@@ -56,13 +56,13 @@ const TextStudio = ({ onClose }) => {
   };
 
   return (
-    <div className="studio-panel w-[330px] max-h-[82vh] overflow-y-auto p-4 rounded-2xl flex flex-col gap-3.5 text-slate-100">
-      <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
+    <div className="studio-panel studio-scroll w-full md:w-[305px] lg:w-[325px] max-h-[72dvh] md:max-h-full overflow-y-auto p-3.5 rounded-2xl flex flex-col gap-3 text-slate-100">
+      <div className="flex items-center justify-between border-b border-white/10 pb-2 shrink-0">
         <div>
-          <h3 className="text-sm font-bold tracking-wide uppercase text-white">
+          <h3 className="text-xs sm:text-sm font-bold tracking-wide uppercase text-white">
             Typography & Jersey Studio
           </h3>
-          <p className="text-[11px] text-slate-400">
+          <p className="text-[10px] sm:text-[11px] text-slate-400">
             Generate box logos, varsity arches & back numbers
           </p>
         </div>
@@ -70,7 +70,7 @@ const TextStudio = ({ onClose }) => {
           <button
             type="button"
             onClick={onClose}
-            className="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-white/10"
+            className="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-white/10 transition cursor-pointer shrink-0"
           >
             ✕
           </button>
@@ -78,7 +78,7 @@ const TextStudio = ({ onClose }) => {
       </div>
 
       {/* Style Mode Selector */}
-      <div>
+      <div className="shrink-0">
         <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-300 block mb-1.5">
           Layout Template
         </span>
@@ -88,7 +88,7 @@ const TextStudio = ({ onClose }) => {
               key={st.id}
               type="button"
               onClick={() => updateField('bgStyle', st.id)}
-              className={`py-1.5 px-2 rounded-lg text-[11px] font-semibold border transition cursor-pointer ${
+              className={`py-1.5 px-2 rounded-lg text-[10px] sm:text-[11px] font-semibold border transition cursor-pointer truncate ${
                 tc.bgStyle === st.id
                   ? 'bg-amber-400 text-slate-950 border-amber-300'
                   : 'bg-white/5 border-white/10 text-slate-300 hover:bg-white/10'
@@ -101,7 +101,7 @@ const TextStudio = ({ onClose }) => {
       </div>
 
       {/* Text Inputs */}
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 shrink-0">
         <div>
           <label className="text-[11px] text-slate-400 block mb-1">
             Primary Headline / Player Name
@@ -147,7 +147,7 @@ const TextStudio = ({ onClose }) => {
       </div>
 
       {/* Font Family */}
-      <div>
+      <div className="shrink-0">
         <label className="text-[11px] text-slate-400 block mb-1">
           Typeface Family
         </label>
@@ -157,7 +157,7 @@ const TextStudio = ({ onClose }) => {
               key={f.label}
               type="button"
               onClick={() => updateField('fontFamily', f.value)}
-              className={`py-1.5 px-2 rounded-lg text-[11px] border transition cursor-pointer truncate ${
+              className={`py-1.5 px-2 rounded-lg text-[10px] sm:text-[11px] border transition cursor-pointer truncate ${
                 tc.fontFamily === f.value
                   ? 'bg-white/15 border-amber-400 text-white font-bold'
                   : 'bg-white/5 border-white/10 text-slate-300 hover:bg-white/10'
@@ -171,7 +171,7 @@ const TextStudio = ({ onClose }) => {
       </div>
 
       {/* Colors & Sliders */}
-      <div className="grid grid-cols-2 gap-3 pt-1">
+      <div className="grid grid-cols-2 gap-2 shrink-0">
         <label className="flex items-center justify-between bg-white/5 px-2.5 py-1.5 rounded-lg border border-white/10 text-xs">
           <span className="text-slate-300">Text Ink</span>
           <input
@@ -182,7 +182,7 @@ const TextStudio = ({ onClose }) => {
           />
         </label>
         <label className="flex items-center justify-between bg-white/5 px-2.5 py-1.5 rounded-lg border border-white/10 text-xs">
-          <span className="text-slate-300">Badge / Accent</span>
+          <span className="text-slate-300">Badge/Accent</span>
           <input
             type="color"
             value={tc.accentColor}
@@ -192,44 +192,44 @@ const TextStudio = ({ onClose }) => {
         </label>
       </div>
 
-      <div className="flex flex-col gap-2">
-        <label className="flex items-center justify-between text-[11px] text-slate-400">
-          <span>Font Size ({tc.fontSize}px)</span>
+      <div className="flex flex-col gap-1.5 shrink-0">
+        <label className="flex items-center justify-between gap-2 text-[11px] text-slate-400">
+          <span className="shrink-0">Font Size ({tc.fontSize}px)</span>
           <input
             type="range"
             min="60"
             max="150"
             value={tc.fontSize}
             onChange={(e) => updateField('fontSize', Number(e.target.value))}
-            className="w-36 accent-amber-400 cursor-pointer"
+            className="w-28 sm:w-32 accent-amber-400 cursor-pointer"
           />
         </label>
-        <label className="flex items-center justify-between text-[11px] text-slate-400">
-          <span>Outline Stroke ({tc.strokeWidth}px)</span>
+        <label className="flex items-center justify-between gap-2 text-[11px] text-slate-400">
+          <span className="shrink-0">Outline Stroke ({tc.strokeWidth}px)</span>
           <input
             type="range"
             min="0"
             max="10"
             value={tc.strokeWidth}
             onChange={(e) => updateField('strokeWidth', Number(e.target.value))}
-            className="w-36 accent-amber-400 cursor-pointer"
+            className="w-28 sm:w-32 accent-amber-400 cursor-pointer"
           />
         </label>
       </div>
 
       {/* Target Zone Action Buttons */}
-      <div className="grid grid-cols-2 gap-2 pt-2 border-t border-white/10">
+      <div className="grid grid-cols-2 gap-2 pt-2 border-t border-white/10 shrink-0">
         <button
           type="button"
           onClick={() => applyTypographyToGarment('front')}
-          className="py-2 px-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs transition cursor-pointer shadow-md shadow-amber-400/20"
+          className="py-2 px-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs transition cursor-pointer shadow-md shadow-amber-400/20 text-center whitespace-nowrap"
         >
           Apply to Front
         </button>
         <button
           type="button"
           onClick={() => applyTypographyToGarment('back')}
-          className="py-2 px-3 rounded-xl bg-sky-400 hover:bg-sky-300 text-slate-950 font-bold text-xs transition cursor-pointer shadow-md shadow-sky-400/20"
+          className="py-2 px-3 rounded-xl bg-sky-400 hover:bg-sky-300 text-slate-950 font-bold text-xs transition cursor-pointer shadow-md shadow-sky-400/20 text-center whitespace-nowrap"
         >
           Apply to Back
         </button>
